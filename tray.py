@@ -19,6 +19,7 @@ class Tray:
       subprocess.run(['notify-send',self.name,message])
       self.said=message
       self.icon.setToolTip(message)
+      print(message)
 
   def update(self):
     raise Exception('Unimplemented update method.')
