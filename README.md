@@ -4,7 +4,7 @@ Make simple Python applications that live in the system tray!
 
 ## Dependencies
 
-Run `pip install pyqt5`.
+Run `pip install pyqt6`.
 
 ## Usage 
 ```py
