@@ -15,11 +15,13 @@ class Tray:
     self.timer.setInterval(interval*1000)
 
   def say(self,message,force=False):
-    if force or message!=self.said:
-      subprocess.run(['notify-send',self.name,message])
-      self.said=message
-      self.icon.setToolTip(message)
-      print(message)
+    if message==self.said and not force:
+      return False
+    subprocess.run(['notify-send',self.name,message])
+    self.said=message
+    self.icon.setToolTip(message)
+    print(message)
+    return True
 
   def update(self):
     raise Exception('Unimplemented update method.')
