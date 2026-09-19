@@ -8,6 +8,7 @@ class Tray:
     self.timer=PyQt6.QtCore.QTimer()
     self.said=False
     self.name=name
+    self.status=self.act('')
     self.icon.activated.connect(lambda:self.menu.popup(PyQt6.QtGui.QCursor.pos()))
     self.icon.setIcon(PyQt6.QtGui.QIcon(icon))
     self.icon.setContextMenu(self.menu)
@@ -21,16 +22,21 @@ class Tray:
     self.said=message
     self.icon.setToolTip(message)
     print(message)
+    self.status.setText(message) 
     return True
 
   def update(self):
     raise Exception('Unimplemented update method.')
+  
+  def act(self,label):
+    action=PyQt6.QtGui.QAction()
+    action.setText(label) 
+    self.menu.addAction(action)
+    return action
     
   def start(self):
-    q=PyQt6.QtGui.QAction()
-    q.triggered.connect(self.application.quit) 
-    q.setText('Quit') 
-    self.menu.addAction(q)
+    quit=self.act('Quit')
+    quit.triggered.connect(self.application.quit)
     self.application.setQuitOnLastWindowClosed(False) 
     self.update()
     self.icon.setVisible(True)
