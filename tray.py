@@ -14,6 +14,7 @@ class Tray:
     self.icon.setContextMenu(self.menu)
     self.timer.timeout.connect(self.update)
     self.timer.setInterval(interval*1000)
+    self.separators=[]#disappear if trashed ¯\_(ツ)_/¯
 
   def say(self,message,force=False):
     if message==self.said and not force:
@@ -42,3 +43,6 @@ class Tray:
     self.icon.setVisible(True)
     self.timer.start()
     self.application.exec() 
+
+  def separate(self):
+    self.separators.append(self.act(''))
